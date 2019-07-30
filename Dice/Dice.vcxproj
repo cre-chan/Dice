@@ -80,6 +80,7 @@
     <IntDir>$(Configuration)\</IntDir>
     <LinkKeyFile>
     </LinkKeyFile>
+    <IncludePath>../CQSDK;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -98,6 +99,7 @@
     <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     <Linkage-AWSSDKCPP-Core>static</Linkage-AWSSDKCPP-Core>
     <Linkage-AWSSDKCPP-DynamoDB>static</Linkage-AWSSDKCPP-DynamoDB>
+    <LibraryPath>$(VC_SourcePath);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -118,7 +120,7 @@
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <FloatingPointModel>Precise</FloatingPointModel>
-      <AdditionalIncludeDirectories>..\CQSDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -199,6 +201,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ShowProgress>NotSet</ShowProgress>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CQP.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -208,6 +211,7 @@
     <ClCompile Include="..\CQSDKCPP\CQstream.cpp" />
     <ClCompile Include="..\CQSDKCPP\CQTools.cpp" />
     <ClCompile Include="..\CQSDKCPP\Unpack.cpp" />
+    <ClCompile Include="Cmds.cpp" />
     <ClCompile Include="CustomMsg.cpp" />
     <ClCompile Include="Dice.cpp" />
     <ClCompile Include="DiceMsg.cpp" />
@@ -250,6 +254,7 @@
     <ClInclude Include="..\CQSDK\CQTools.h" />
     <ClInclude Include="..\CQSDK\Unpack.h" />
     <ClInclude Include="APPINFO.h" />
+    <ClInclude Include="CmdParser.h" />
     <ClInclude Include="CustomMsg.h" />
     <ClInclude Include="DiceMsg.h" />
     <ClInclude Include="DiceMsgSend.h" />
@@ -267,6 +272,7 @@
     <ClInclude Include="RandomGenerator.h" />
     <ClInclude Include="RD.h" />
     <ClInclude Include="RDConstant.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="StorageBase.h" />
   </ItemGroup>
   <ItemGroup>

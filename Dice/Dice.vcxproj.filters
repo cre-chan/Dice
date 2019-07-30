@@ -22,6 +22,12 @@
     <Filter Include="头文件\nlohmann">
       <UniqueIdentifier>{911e9211-0dd0-42ff-82bc-c6ae90928af6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\CmdParser">
+      <UniqueIdentifier>{704c128d-6bf6-48f1-9c31-a5567069a2e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\CmdParser">
+      <UniqueIdentifier>{fa705f7e-197a-4ca2-9476-4a1d70b0b6cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dice.cpp">
@@ -95,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="EventHandler.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Cmds.cpp">
+      <Filter>源文件\CmdParser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +226,12 @@
     </ClInclude>
     <ClInclude Include="EventHandler.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdParser.h">
+      <Filter>头文件\CmdParser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

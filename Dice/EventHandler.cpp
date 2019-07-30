@@ -48,6 +48,9 @@
 #include "DiceNetwork.h"
 #include "EventHandler.h"
 #include "RDConstant.h"
+
+
+#include "CmdParser.h"
 /*
 TODO:
 1. en可变成长检定
@@ -153,6 +156,8 @@ namespace Dice
 			Sleep(10);
 
 		thread msgSendThread(SendMsg);
+
+
 		msgSendThread.detach();
 		strFileLoc = getAppDirectory();
 		/*
@@ -307,6 +312,7 @@ namespace Dice
 		}
 		ifstreamCustomMsg.close();
 	}
+
 	void EventHandler::HandleMsgEvent(DiceMsg dice_msg, bool& block_msg)
 	{
 		init(dice_msg.msg);
@@ -322,15 +328,24 @@ namespace Dice
 			dice_msg.msg = dice_msg.msg.substr(strAt.length());
 		}
 		init2(dice_msg.msg);
+
 		if (dice_msg.msg[0] != '.')
 			return;
+
+		//通过parser将msg转化为unique_ptr<Cmd>，返回空值代表该msg不为指令，不执行
+		auto cmd = CmdParser::parse_msg(dice_msg.msg);
+		if (cmd.get() != nullptr)
+			cmd->run(dice_msg, block_msg);
+
 		int intMsgCnt = 1;
 		while (isspace(static_cast<unsigned char>(dice_msg.msg[intMsgCnt])))
 			intMsgCnt++;
 		block_msg = true;
 		const string strNickName = getName(dice_msg.qq_id, dice_msg.group_id);
 		string strLowerMessage = dice_msg.msg;
-		transform(strLowerMessage.begin(), strLowerMessage.end(), strLowerMessage.begin(), [](unsigned char c) { return tolower(c); });
+
+		for (auto strLowerMsg = strLowerMessage.begin(); strLowerMsg != strLowerMessage.end(); strLowerMsg++) *strLowerMsg = tolower(*strLowerMsg);
+		//transform(strLowerMessage.begin(), strLowerMessage.end(), strLowerMessage.begin(), [](unsigned char c) { return tolower(c); });
 		if (strLowerMessage.substr(intMsgCnt, 3) == "bot")
 		{
 			intMsgCnt += 3;
